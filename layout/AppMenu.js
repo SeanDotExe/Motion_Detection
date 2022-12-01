@@ -24,7 +24,7 @@ const AppMenu = () => {
                 {
                     label: 'View Source',
                     icon: 'pi pi-fw pi-search',
-                    url: 'https://github.com/',
+                    url: 'https://github.com/SeanDotExe/Motion_Detection.git',
                     target: '_blank'
                 },
                 { label: 'Logout', icon: 'pi pi-fw pi-sign-out', to: '/pages/logout'},
