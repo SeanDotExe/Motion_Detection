@@ -11,7 +11,7 @@ const AppMenu = () => {
     const model = [
         {
             label: 'Home',
-            items: [{ label: 'Dashboard', icon: 'pi pi-fw pi-home', to: '/' },
+            items: [{ label: 'Dashboard', icon: 'pi pi-fw pi-home', to: '/auth/dashboard' },
             { label: 'Edit Data', icon: 'pi pi-fw pi-pencil', to: '/pages/Editdata'}
         ]
            
@@ -20,14 +20,14 @@ const AppMenu = () => {
         {
             label: 'Settings',
             items: [
-                { label: 'Account', icon: 'pi pi-fw pi-user', to: '/pages/changepass'},
+                { label: 'Account', icon: 'pi pi-fw pi-user', to: '/uikit/formlayout'},
                 {
                     label: 'View Source',
                     icon: 'pi pi-fw pi-search',
                     url: 'https://github.com/SeanDotExe/Motion_Detection.git',
                     target: '_blank'
                 },
-                { label: 'Logout', icon: 'pi pi-fw pi-sign-out', to: '/pages/logout'},
+                { label: 'Logout', icon: 'pi pi-fw pi-sign-out', to: '/'},
             ]
         }
     ];

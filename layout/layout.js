@@ -111,13 +111,9 @@ const Layout = (props) => {
 
                 <meta name="robots" content="index, follow" />
                 <meta name="viewport" content="initial-scale=1, width=device-width" />
-                <meta property="og:type" content="website"></meta>
-                <meta property="og:title" content="Motion Detector Dashboard"></meta>
-
-             
-                <meta property="og:image" content="https://www.primefaces.org/static/social/sakai-nextjs.png"></meta>
-                <meta property="og:ttl" content="604800"></meta>
+                <link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet"></link>
                 <link rel="icon" href={`${contextPath}/favicon.ico`} type="image/x-icon"></link>
+                <script src="https://kit.fontawesome.com/a81368914c.js"></script>
             </Head>
 
             <div className={containerClass}>

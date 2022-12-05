@@ -6,6 +6,7 @@ import 'primeflex/primeflex.css';
 import 'primeicons/primeicons.css';
 import '../styles/layout/layout.scss';
 import '../styles/demo/Demos.scss';
+import Script from 'next/script';
 
 export default function MyApp({ Component, pageProps }) {
     if (Component.getLayout) {

@@ -209,7 +209,7 @@ const Dashboard = () => {
                     <h5>View Image</h5>
                     <div className="flex justify-content-center">
                         {product && (
-                            <Image src={`${contextPath}/demo/images/galleria/${product.image}`} alt={product.image} width={550} preview />
+                            <Image src={`${contextPath}/demo/images/galleria/${product.image}`} alt={product.image} width={400} preview />
                         )}
                     </div>
                 </div>
