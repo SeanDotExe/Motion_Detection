@@ -8,7 +8,7 @@ const AppFooter = () => {
 
     return (
         <div className="layout-footer">
-            <img src={"/demo/images/galleria/Frame 1team.png"} alt="" width={1100}/>
+            <img src={require("/demo/images/galleria/Frame 1team.png")} alt="" width={1100}/>
             {/* <img src={`${contextPath}/layout/images/logo-${layoutConfig.colorScheme === 'light' ? 'dark' : 'white'}.svg`} alt="Logo" height="20" className="mr-2" /> */}
             {/* <span className="font-medium ml-2">Motion Detection</span> */}
         </div>
