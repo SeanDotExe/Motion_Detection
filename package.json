@@ -1,11 +1,12 @@
 {
-    "name": "Motion-Detection",
-    "version": "8.0.1-SNAPSHOT",
+    "name": "Motion_Detection",
+    "version": "1.0",
     "private": false,
     "scripts": {
         "dev": "next dev",
         "build": "next build",
         "start": "next start",
+        "prod": "next build && next export",
         "export": "next build && next export",
         "lint": "next lint",
         "format": "prettier --write \"**/**/*.{js,ts,tsx}\""
