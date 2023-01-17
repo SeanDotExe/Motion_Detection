@@ -12,7 +12,7 @@ const AppMenu = () => {
         {
             label: 'Home',
             items: [{ label: 'Dashboard', icon: 'pi pi-fw pi-home', to: '/auth/dashboard' },
-            { label: 'Edit Data', icon: 'pi pi-fw pi-pencil', to: '/pages/Editdata'}
+            // { label: 'Edit Data', icon: 'pi pi-fw pi-pencil', to: '/pages/Editdata'}
         ]
            
         },
@@ -20,7 +20,7 @@ const AppMenu = () => {
         {
             label: 'Settings',
             items: [
-                { label: 'Account', icon: 'pi pi-fw pi-user', to: '/uikit/formlayout'},
+                // { label: 'Account', icon: 'pi pi-fw pi-user', to: '/uikit/formlayout'},
                 {
                     label: 'View Source',
                     icon: 'pi pi-fw pi-search',

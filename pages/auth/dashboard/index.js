@@ -1,7 +1,4 @@
 import getConfig from 'next/config';
-import { Galleria } from 'primereact/galleria';
-import { Carousel } from 'primereact/carousel';
-import { Button } from 'primereact/button';
 import { Image } from 'primereact/image';
 import { PhotoService } from '../../../demo/service/PhotoService';
 import React, { useContext, useEffect, useRef, useState } from 'react';
