@@ -8,9 +8,28 @@ import { Password } from 'primereact/password';
 import { LayoutContext } from '../layout/context/layoutcontext';
 import { InputText } from 'primereact/inputtext';
 import { classNames } from 'primereact/utils';
+import Axios from 'axios';
 
 const LoginPage = () => {
-    const [password, setPassword] = useState('');
+    const [passwordLog, logPassword] = useState('');
+    const [emailLog, logEmail] = useState('');
+    const [loginStatus, setloginStatus] = useState('');
+    
+    const login = () => {
+        Axios.post('http://localhost:5000/login_user',{
+            email:emailLog,  
+            password:passwordLog
+        }).then((response)=>{
+            if(response.data.message){
+                setloginStatus(response.data.message);
+            }else{
+                router.push('/auth/dashboard');
+            }
+            
+        });
+    };
+
+
     const [checked, setChecked] = useState(false);
     const { layoutConfig } = useContext(LayoutContext);
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
@@ -33,12 +52,12 @@ const LoginPage = () => {
                             <label htmlFor="email1" className="block text-900 text-xl font-medium mb-2">
                                 Email
                             </label>
-                            <InputText inputid="email1" type="text" placeholder="Enter your email" className="w-full md:w-30rem mb-5" style={{ padding: '1rem' }} />
+                            <InputText inputid="email1" type="text" onChange={(e) => logEmail(e.target.value)} placeholder="Enter your email" className="w-full md:w-30rem mb-5" style={{ padding: '1rem' }} />
 
                             <label htmlFor="password1" className="block text-900 font-medium text-xl mb-2">
                                 Password
                             </label>
-                            <Password inputid="password1" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Enter your password" toggleMask className="w-full mb-5" inputClassName='w-full p-3 md:w-30rem'></Password>
+                            <Password inputid="password1" onChange={(e) => logPassword(e.target.value)} placeholder="Enter your password" toggleMask className="w-full mb-5" inputClassName='w-full p-3 md:w-30rem'></Password>
 
                             <div className="flex align-items-center justify-content-between mb-5 gap-5">
                                 <div className="flex align-items-center">
@@ -51,7 +70,8 @@ const LoginPage = () => {
                                 </a>
                             </div>
                             
-                            <Button label="Sign In" className="w-full p-3 text-xl" onClick={() => router.push('/auth/dashboard')}></Button>
+                            <Button label="Sign In" className="w-full p-3 text-xl" onClick={login}></Button>
+                            <h5 className='text-center p-error'>{loginStatus}</h5>
                         </div>
                     </div>
                 </div>

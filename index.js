@@ -5,6 +5,7 @@ const fs = require("fs");
 const bodyParser = require("body-parser");
 const port = 5000;
 var path = require('path');
+const cors = require('cors');
 
 const connection = mysql.createConnection({
     host: "localhost",
@@ -16,6 +17,8 @@ const connection = mysql.createConnection({
 //
 app.use(bodyParser.json({limit: "50mb"}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
+app.use(cors());
+
 
 // CREATE(insert)
 app.post("/tolongges", (req, res) => {
@@ -79,6 +82,56 @@ app.get("/show", (req, res) => {
       }
     });
   });
+
+
+// REGISTRATION
+app.post("/register_user", (req, res) => {
+  const email = req.body.email;
+  const password = req.body.password;
+
+  
+
+  connection.query(
+    "INSERT INTO register_user (email, password) VALUES (?,?)",
+    [email, password],
+    (err, result) => {
+      console.log(err);
+    }
+  );
+
+  // bcrypt.hash(password, saltRounds, (err, hash) => {
+  //   if (err) {
+  //     console.log(err);
+  //   }
+
+    
+  // });
+});
+
+app.post("/login_user", (req, res) => {
+  const email = req.body.email;
+  const password = req.body.password;
+
+  connection.query(
+    "SELECT * FROM register_user WHERE email = ? AND password = ?;",
+    [email,password],
+    (err, result) => {
+      if(err){ 
+        res.send({err:err});
+      }
+      
+      if(result.length>0){
+        res.send(result);
+        
+
+      }else{
+          res.send({ message: "Invalid Credentials"});
+
+      }
+    }
+  );
+})   
+
 
 
 app.listen(port, () => {

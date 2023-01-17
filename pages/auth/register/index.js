@@ -8,10 +8,22 @@ import { LayoutContext } from '../../../layout/context/layoutcontext';
 import { InputText } from 'primereact/inputtext';
 import { classNames } from 'primereact/utils';
 import { Dialog } from 'primereact/dialog';
+import Axios from 'axios';
 
 const LoginPage = () => {
-    const [password, setPassword] = useState('');
-    
+    const [passwordReg, setPassword] = useState('');
+    const [emailReg, setEmail] = useState('');
+
+    const register = () => {
+        Axios.post('http://localhost:5000/register_user',{
+            email:emailReg,  
+            password:passwordReg
+        }).then((response)=>{
+            console.log(response);
+        });
+
+    };
+
     const [checked, setChecked] = useState(false);
     const [displayBasic, setDisplayBasic] = useState(false);
     const { layoutConfig } = useContext(LayoutContext);
@@ -43,12 +55,12 @@ const LoginPage = () => {
                                 <label htmlFor="email1" className="block text-900 text-xl font-medium mb-2">
                                     Email
                                 </label>
-                                <InputText inputid="email1" type="text" placeholder="Enter your email address" className="w-full md:w-30rem mb-5" style={{ padding: '1rem' }} required/>
+                                <InputText inputid="email1" onChange={(e) => setEmail(e.target.value)} type="text" placeholder="Enter your email address" className="w-full md:w-30rem mb-5" style={{ padding: '1rem' }} required/>
 
                                 <label htmlFor="password1" className="block text-900 font-medium text-xl mb-2">
                                     Password
                                 </label>
-                                <Password inputid="password1" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Enter your password" toggleMask className="w-full mb-5" inputClassName='w-full p-3 md:w-30rem' required></Password>
+                                <Password inputid="password1" onChange={(e) => setPassword(e.target.value)} placeholder="Enter your password" toggleMask className="w-full mb-5" inputClassName='w-full p-3 md:w-30rem' required></Password>
 
                                 <div className="flex align-items-center text-center justify-content-center mb-5 gap-5">
                                     <div className="flex align-items-center">
@@ -65,7 +77,7 @@ const LoginPage = () => {
                                         You successfully create an account. You can now login your account
                                     </p>
                                 </Dialog>
-                                <Button label="Register" className="w-full p-3 text-xl"></Button>
+                                <Button onClick={register} label="Register" className="w-full p-3 text-xl"></Button>
                             </div>
                         </form>
                     </div>
