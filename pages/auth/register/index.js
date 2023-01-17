@@ -11,6 +11,7 @@ import { Dialog } from 'primereact/dialog';
 
 const LoginPage = () => {
     const [password, setPassword] = useState('');
+    
     const [checked, setChecked] = useState(false);
     const [displayBasic, setDisplayBasic] = useState(false);
     const { layoutConfig } = useContext(LayoutContext);
