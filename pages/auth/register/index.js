@@ -9,19 +9,24 @@ import { InputText } from 'primereact/inputtext';
 import { classNames } from 'primereact/utils';
 import { Dialog } from 'primereact/dialog';
 import Axios from 'axios';
-
 const LoginPage = () => {
     const [passwordReg, setPassword] = useState('');
     const [emailReg, setEmail] = useState('');
 
     const register = () => {
+        
         Axios.post('http://localhost:5000/register_user',{
             email:emailReg,  
             password:passwordReg
         }).then((response)=>{
+            if(response.data.message){
+                console.log(response.data.message);
+            }
             console.log(response);
+            router.push('/auth/dashboard');
+            
         });
-
+        
     };
 
     const [checked, setChecked] = useState(false);

@@ -25,7 +25,6 @@ const LoginPage = () => {
             }else{
                 router.push('/auth/dashboard');
             }
-            
         });
     };
 

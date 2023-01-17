@@ -7,6 +7,12 @@ const port = 5000;
 var path = require('path');
 const cors = require('cors');
 
+const cookieParser = require("cookie-parser");
+const session = require("express-session");
+const bcrypt = require("bcrypt");
+const saltRounds = 10;
+
+
 const connection = mysql.createConnection({
     host: "localhost",
     user: "root",
@@ -90,22 +96,24 @@ app.post("/register_user", (req, res) => {
   const password = req.body.password;
 
   
-
-  connection.query(
-    "INSERT INTO register_user (email, password) VALUES (?,?)",
-    [email, password],
-    (err, result) => {
+  bcrypt.hash(password, saltRounds, (err, hash) => {
+    if(err){
       console.log(err);
     }
-  );
 
-  // bcrypt.hash(password, saltRounds, (err, hash) => {
-  //   if (err) {
-  //     console.log(err);
-  //   }
+    connection.query(
+      "INSERT INTO register_user (email, password) VALUES (?,?)",
+      [email, hash],
+      (err, result) => {
+        console.log(err);
+        console.log(result);
+        if(result){
+          res.send({ message: "Invalid dssadasd"});
+        }
 
-    
-  // });
+      }
+    );
+  })
 });
 
 app.post("/login_user", (req, res) => {
@@ -113,19 +121,23 @@ app.post("/login_user", (req, res) => {
   const password = req.body.password;
 
   connection.query(
-    "SELECT * FROM register_user WHERE email = ? AND password = ?;",
-    [email,password],
+    "SELECT * FROM register_user WHERE email = ?;",
+    email,
     (err, result) => {
       if(err){ 
         res.send({err:err});
       }
       
       if(result.length>0){
-        res.send(result);
-        
-
+        bcrypt.compare(password, result[0].password, (error, response)=>{
+          if(response){
+            res.send(result);
+          }else {
+            res.send({ message: "Invalid Credentials"});
+          }
+        });
       }else{
-          res.send({ message: "Invalid Credentials"});
+          res.send({ message: "User doesn't exist"});
 
       }
     }
