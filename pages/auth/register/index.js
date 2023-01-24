@@ -9,21 +9,31 @@ import { InputText } from 'primereact/inputtext';
 import { classNames } from 'primereact/utils';
 import { Dialog } from 'primereact/dialog';
 import Axios from 'axios';
+import { ToastContainer,toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const LoginPage = () => {
     const [passwordReg, setPassword] = useState('');
     const [emailReg, setEmail] = useState('');
 
     const register = () => {
-        
+        console.log("dumaan");
         Axios.post('http://localhost:5000/register_user',{
             email:emailReg,  
             password:passwordReg
         }).then((response)=>{
+            console.log(response.data.message);
             if(response.data.message){
-                console.log(response.data.message);
+                toast.success('Successfully Registered',{ 
+                    position:"top-center",
+                    autoClose: 3000,
+                    hideProgressBar:false,
+                    closeOnClick:true,
+                    pauseOnHover:true,
+                    draggable:true,
+                    progress:undefined,
+
+                });
             }
-            console.log(response);
-            router.push('/auth/dashboard');
             
         });
         
@@ -55,7 +65,7 @@ const LoginPage = () => {
                             <div className="text-900 text-3xl font-medium mb-3">Create a new account</div>
                             <span className="text-600 font-medium">It's quick and easy.</span>
                         </div>
-                        <form>
+                        
                             <div>
                                 <label htmlFor="email1" className="block text-900 text-xl font-medium mb-2">
                                     Email
@@ -77,18 +87,15 @@ const LoginPage = () => {
                                         Forgot password?
                                     </a> */}
                                 </div>
-                                <Dialog header="Dialog" visible={displayBasic} style={{ width: '30vw' }} modal footer={basicDialogFooter} onHide={() => setDisplayBasic(false)}>
-                                    <p>
-                                        You successfully create an account. You can now login your account
-                                    </p>
-                                </Dialog>
+                                
                                 <Button onClick={register} label="Register" className="w-full p-3 text-xl"></Button>
                             </div>
-                        </form>
+                       
                     </div>
                 </div>
             </div>
         </div>
+        
     );
 };
 
@@ -97,7 +104,9 @@ LoginPage.getLayout = function getLayout(page) {
         <React.Fragment>
             {page}
             <AppConfig simple />
+            <ToastContainer/>
         </React.Fragment>
+        
     );
 };
 export default LoginPage;
